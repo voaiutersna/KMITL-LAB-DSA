@@ -17,5 +17,5 @@ def main():
         result = obj.calculate_area()
     elif condition == "perimeter":
         result = obj.calculate_perimeter()
-    print(result)
+    print(f"{result:.2f}")
 main()

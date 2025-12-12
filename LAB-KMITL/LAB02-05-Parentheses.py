@@ -6,7 +6,7 @@ class ArrayStack:
         try:
             if input_data.isdigit():
                 input_data = int(input_data)
-            elif input_data.isdigit(".","",1):
+            elif input_data.replace(".","",1).isdigit():
                 input_data = float(input_data)
         except(TypeError, ValueError, ArithmeticError, AttributeError):
             return None
@@ -47,5 +47,9 @@ def  is_parentheses_matching(expression):
 def main():
     inp = input()
     result = is_parentheses_matching(inp)
-    print(result)
+    if result:
+        print(f"Parentheses in {inp} are matched")
+    else:
+        print(f"Parentheses in {inp} are unmatched")
+    print(is_parentheses_matching(inp))
 main()

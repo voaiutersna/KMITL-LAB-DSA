@@ -6,7 +6,7 @@ class ArrayStack:
         try:
             if input_data.isdigit():
                 input_data = int(input_data)
-            elif input_data.isdigit(".","",1):
+            elif input_data.replace(".","",1).isdigit():
                 input_data = float(input_data)
         except(TypeError, ValueError, ArithmeticError, AttributeError):
             return None
@@ -35,10 +35,10 @@ class ArrayStack:
 
 def  spam(expression):
     stack = ArrayStack()
-    open_bucket = ["(","{","["]
+    bucket = ["(","{","["]
     close_bucket = [")","}","]"]
     for i in expression:
-        if i in open_bucket:
+        if i in bucket:
             stack.push(i)
             continue
         if i in close_bucket:

@@ -33,23 +33,27 @@ class ArrayStack:
     def print_stack(self):
         print(self.data)
     
-def copy_stack(s1,s2):
-    while not s2.is_empty():
-        s2.pop()
-    for i in s1.data:
-        s2.push(i)
+STACK_ = ArrayStack()
 
-def main():
-    s1 = ArrayStack()
-    s2 = ArrayStack()
-    s1.push(10)
-    s1.push(20)
-    s1.push(30)
-    s2.push(15)
-    s2.push(25)
+STACK_.push("100")
+STACK_.push(100)
+STACK_.push("3.14")
+STACK_.push(3.14)
+STACK_.push("66.4a")
+STACK_.push("Ackerman")
 
-    copy_stack(s1,s2)
+STACK_.print_stack()
 
-    s1.print_stack()
-    s2.print_stack()
-main()
+print(STACK_.get_size())
+VAR1_ = STACK_.pop()
+print(VAR1_)
+STACK_.print_stack()
+print(STACK_.get_size())
+
+while not STACK_.is_empty():
+    print(STACK_.pop())
+
+print()
+print(STACK_.pop())
+print(STACK_.get_stack_top())
+print(VAR1_)

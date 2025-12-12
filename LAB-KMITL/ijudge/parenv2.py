@@ -18,7 +18,7 @@ class ArrayStack:
             return True
         return False
     def pop(self):
-        if self.is_empty():
+        if self.is_empty() :
             print("Underflow: Cannot pop data from an empty list")
             return None
         self.size -= 1
@@ -32,24 +32,22 @@ class ArrayStack:
         return self.size
     def print_stack(self):
         print(self.data)
-    
-def copy_stack(s1,s2):
-    while not s2.is_empty():
-        s2.pop()
-    for i in s1.data:
-        s2.push(i)
-
-def main():
+def  is_parentheses_matching():
+    x = input()
     s1 = ArrayStack()
-    s2 = ArrayStack()
-    s1.push(10)
-    s1.push(20)
-    s1.push(30)
-    s2.push(15)
-    s2.push(25)
-
-    copy_stack(s1,s2)
-
-    s1.print_stack()
-    s2.print_stack()
-main()
+    bucket = 0
+    close = 0
+    for i in x:
+        if i == "(":
+            bucket += 1
+            s1.push(i)
+        if i == ")": 
+            close += 1
+            s1.pop()
+    if s1.is_empty() and x != ")" and bucket == close:
+        print(f"Parentheses in {x} are matched")
+        print("True")
+        return
+    print(f"Parentheses in {x} are unmatched")
+    print("False")
+is_parentheses_matching()

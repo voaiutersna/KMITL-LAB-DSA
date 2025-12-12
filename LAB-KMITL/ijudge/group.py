@@ -6,7 +6,7 @@ class ArrayStack:
         try:
             if input_data.isdigit():
                 input_data = int(input_data)
-            elif input_data.replace(".","",1).isdigit():
+            elif input_data.isdigit(".","",1):
                 input_data = float(input_data)
         except(TypeError, ValueError, ArithmeticError, AttributeError):
             return None
@@ -33,23 +33,36 @@ class ArrayStack:
     def print_stack(self):
         print(self.data)
     
-def copy_stack(s1,s2):
-    while not s2.is_empty():
-        s2.pop()
-    for i in s1.data:
-        s2.push(i)
-
+def Group(group,stack):
+    list_group = []
+    for i in range(group):
+        list_group.append(list())
+    # print(list_group)
+    amount_group = len(list_group)-1
+    index = 0
+    while not stack.is_empty():
+        if index == amount_group:
+            list_group[index].append(stack.pop())
+            index = 0
+        else:
+            list_group[index].append(stack.pop())
+            index += 1
+    num = 0
+    for i in list_group:
+        num += 1
+        output = ""
+        for j in range(len(i)):
+            output += i[j]
+            if j != len(i)-1:
+                output += ", "
+        print(f"Group {num}: {output}")
+            
 def main():
-    s1 = ArrayStack()
-    s2 = ArrayStack()
-    s1.push(10)
-    s1.push(20)
-    s1.push(30)
-    s2.push(15)
-    s2.push(25)
-
-    copy_stack(s1,s2)
-
-    s1.print_stack()
-    s2.print_stack()
+    group = int(input())
+    person = int(input())
+    stack = ArrayStack()
+    for _ in range(person):
+        inp = input()
+        stack.push(inp)
+    Group(group,stack)
 main()
