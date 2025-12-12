@@ -6,7 +6,7 @@ class ArrayStack:
         try:
             if input_data.isdigit():
                 input_data = int(input_data)
-            elif input_data.isdigit(".","",1):
+            elif input_data.replace(".","",1).isdigit():
                 input_data = float(input_data)
         except(TypeError, ValueError, ArithmeticError, AttributeError):
             return None
@@ -46,15 +46,15 @@ def infixToPostfix(expression):
                 if stack.is_empty():
                     stack.push(i)
                 else: 
-                    while True:
+                    while not stack.is_empty():
                         top = stack.get_stack_top() 
-                        print("top working",top) 
+                        # print("top working",top) 
                         if top in high_oper:
                             pop_oper = stack.pop() 
                             postfix += pop_oper 
-                        if top in low_oper:
-                            stack.push(i)
+                        else:
                             break
+                    stack.push(i)
             else:
                 if stack.is_empty():
                     stack.push(i)
@@ -71,6 +71,6 @@ def infixToPostfix(expression):
 
 def main():
     inp = input()
-    result = infixToPostfix(inp)
+    result = infixToPostfix(inp.replace(" ",""))
     print(result)
 main()
