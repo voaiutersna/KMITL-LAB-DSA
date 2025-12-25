@@ -25,7 +25,7 @@ class ArrayStack:
         return self.data.pop()
     def get_stack_top(self):
         if self.is_empty():
-            print("Underflow: Cannot get stack top from an empty list")
+            print("Underflow: Cannot pop data from an empty list")
             return None
         return self.data[-1]
     def get_size(self):
@@ -50,7 +50,10 @@ def  spam(expression):
                 close = "}"
             elif top == "[":
                 close = "]"
+            if top is None:
+                return False
             if close != i:
+                print("Underflow: Cannot pop data from an empty list")
                 return False
             elif close == i:
                 stack.pop()
