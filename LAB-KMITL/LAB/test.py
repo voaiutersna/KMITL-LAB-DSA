@@ -42,26 +42,45 @@ class SinglyLinkedList:
         self.head = node
         node.next = curr_head
         self.count += 1
-    def insert_before(self,data, node):
-        pass
+    def insert_before(self,node, data):
+        new_node = DataNode(node)
+        head = self.head
+        if head is None:
+            print(f"Cannot insert, {node} does not exist.")
+            return
+        if self.head.data == data:
+            new_node.next = self.head
+            self.head = new_node
+            self.count += 1
+            return
+        prev = self.head
+        while prev.next != None:
+            if prev.next.data == data:
+                before = prev.next
+                prev.next = new_node
+                new_node.next = before
+                self.count += 1
+                return
+            prev = prev.next
+        print(f"Cannot insert, {node} does not exist.")
     def delete(self,data):
         pass
 
 def main():
-  link = SinglyLinkedList()
+  mylist = SinglyLinkedList()
   for _ in range(int(input())):
     text = input().strip()
     condition, data = text.split(": ")
     if condition == "F":
-      link.insert_front(data)
+      mylist.insert_front(data)
     elif condition == "L":
-      link.insert_last(data)
+      mylist.insert_last(data)
     elif condition == "B":
-      link.insert_before(*data.split(", "))
+        mylist.insert_before(*data.split(", "))
     # elif condition == "D":
-    #    link.delete(data)
+    #     mylist.delete(data)
     else:
-        print("Invalid Condition!")
-  link.traverse()
+      print("Invalid Condition!")
+  mylist.traverse()
 
 main()
