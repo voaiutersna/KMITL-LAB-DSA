@@ -17,4 +17,3 @@ def main():
     inp = int(input())
     print(RecursiveZigzagSum(inp))
 main()
-

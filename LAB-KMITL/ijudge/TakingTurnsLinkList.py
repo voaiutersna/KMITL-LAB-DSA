@@ -19,6 +19,47 @@ class SinglyLinkedList:
                 print(" -> ",end="")
             head = head.next
         print(head.data)
+    def takingturn(self,reverse_linklist,first_num):
+        head = self.head
+        if head is None:
+            print(first_num)
+            return
+        print(first_num,end=" -> ")
+        l = 0
+        r = self.count-1
+        count_l = 0
+        count_r = 0
+        read_l = True
+        read_r = False
+        curr_l = self.head
+        curr_r = reverse_linklist.head
+        # print("r",r)
+        while l <= r:
+            if read_l is True:
+                if count_l == 2:
+                    read_l = False
+                    read_r = True
+                    count_l = 0
+                    continue
+                #traver
+                print(curr_l.data,end="")
+                count_l += 1
+                curr_l = curr_l.next
+                l += 1
+                if l<=r:
+                    print(" -> ",end="")
+            elif read_r is True:
+                if count_r == 2:
+                    read_r = False
+                    read_l = True
+                    count_r = 0
+                    continue
+                print(curr_r.data,end="")
+                count_r += 1
+                curr_r = curr_r.next
+                r -= 1
+                if l<=r:
+                    print(" -> ",end="")
     def insert_last(self,data):
         node = DataNode(data)
         if not self.count:
@@ -99,23 +140,41 @@ class SinglyLinkedList:
         print("Cannot delete, ",end="")
         print(data,end="")
         print(" does not exist.")
-           
-
+    def findindex(self,index):
+        head = self.head
+        
+        if index < 1 or index > self.count:
+            print("Error")
+            return
+        #traverse
+        count = 1
+        curr = head
+        while count <= index:
+            if count == index:
+                print(curr.data)
+                return
+            curr = curr.next
+            count += 1
 def main():
-  mylist = SinglyLinkedList()
-  for _ in range(int(input())):
-    text = input()
-    condition, data = text.split(": ")
-    if condition == "F":
-      mylist.insert_front(data)
-    elif condition == "L":
-      mylist.insert_last(data)
-    elif condition == "B":
-      mylist.insert_before(*data.split(", "))
-    elif condition == "D":
-      mylist.delete(data)
-    else:
-      print("Invalid Condition!")
-  mylist.traverse()
-
+    linklist = SinglyLinkedList()
+    reverse_linklist = SinglyLinkedList()
+    first_num = 0
+    num = int(input())
+    if num == 1:
+        inp = int(input())
+        print(inp)
+        return
+    elif num <= 0:
+        return
+    for i in range(num):
+        inp = int(input())
+        if i == num-1:
+            first_num = inp
+            continue
+        linklist.insert_last(inp)
+        reverse_linklist.insert_front(inp)
+    # print("OUTPUT")
+    linklist.takingturn(reverse_linklist,first_num)
+    # linklist.traverse()
+    # reverse_linklist.traverse()
 main()

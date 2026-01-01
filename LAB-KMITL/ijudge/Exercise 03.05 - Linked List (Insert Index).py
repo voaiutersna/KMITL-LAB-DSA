@@ -16,7 +16,7 @@ class SinglyLinkedList:
             print(head.data,end="")
             count += 1
             if self.count != count:
-                print(" -> ",end="")
+                print(" ",end="")
             head = head.next
         print(head.data)
     def insert_last(self,data):
@@ -99,23 +99,59 @@ class SinglyLinkedList:
         print("Cannot delete, ",end="")
         print(data,end="")
         print(" does not exist.")
-           
-
+    def findindex(self,index):
+        head = self.head
+        
+        if index < 1 or index > self.count:
+            print("Error")
+            return
+        #traverse
+        count = 1
+        curr = head
+        while count <= index:
+            if count == index:
+                print(curr.data)
+                return
+            curr = curr.next
+            count += 1
+    def insert_index(self,index,data):
+        prev = self.head
+        insert_node = DataNode(data)
+        if index == self.count:
+            self.insert_last(data)
+            return
+        if index > self.count - 1 or index < 0:
+            # print("Wrong index")
+            return
+        count = 0
+        #insert head
+        if index == 0:
+            self.insert_front(data)
+            return
+        while prev != None:
+            if count+1 == index: #อยู่ที่nodeก่อนหน้าที่จะถึงindex
+                next_node = prev.next
+                prev.next = insert_node
+                insert_node.next = next_node
+                self.count += 1
+                return
+            prev = prev.next
+            count += 1
+                
 def main():
-  mylist = SinglyLinkedList()
-  for _ in range(int(input())):
-    text = input()
-    condition, data = text.split(": ")
-    if condition == "F":
-      mylist.insert_front(data)
-    elif condition == "L":
-      mylist.insert_last(data)
-    elif condition == "B":
-      mylist.insert_before(*data.split(", "))
-    elif condition == "D":
-      mylist.delete(data)
-    else:
-      print("Invalid Condition!")
-  mylist.traverse()
-
+    linklist = SinglyLinkedList()
+    num = int(input())
+    # if num == 0:
+    #     inp = int(input())
+    #     data = int(input())
+    #     if inp == 0:
+    #         print(data)
+    #     return
+    for _ in range(num):
+        data = int(input())
+        linklist.insert_last(data)
+    index = int(input())
+    find_data = int(input())
+    linklist.insert_index(index,find_data)
+    linklist.traverse()
 main()
