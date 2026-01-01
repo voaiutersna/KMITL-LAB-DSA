@@ -111,32 +111,30 @@ class SinglyLinkedList:
         self.count -= 1
         return last
 def main():
-    mylist = SinglyLinkedList()
-    for _ in range(int(input())):
-        text = input()
-        condition, data = text.split(": ")
-        if condition == "F":
-            mylist.insert_front(data)
-        elif condition == "L":
-            mylist.insert_last(data)
-        elif condition == "B":
-            mylist.insert_before(*data.split(", "))
-        elif condition == "D":
-            mylist.delete(data)
-        else:
-            print("Invalid Condition!")
-    mylist.traverse()
-
-    # Test Tool
-    # linklist = SinglyLinkedList()
-    # loop = int(input())
-    # for i in range(loop):
-    #     inp = int(input())
-    #     linklist.insert_last(inp)
-
-    # linklist.traverse()
-    # print("After")
-    # linklist.delete_front()
-    # linklist.delete_last()
-    # linklist.traverse()
+    linklist = SinglyLinkedList()
+    loop = int(input())
+    for i in range(loop):
+        inp = int(input())
+        linklist.insert_last(inp)
+    result = SinglyLinkedList()
+    if linklist.count == 1:
+        print(linklist.head.data)
+        return
+    first = True
+    while linklist.count > 0:
+        if first:
+            result.insert_last(linklist.delete_last())
+            first = False
+        for _ in range(2):
+            result.insert_last(linklist.delete_front())
+            if not linklist.count:
+                result.traverse()
+                return
+        for _ in range(2):
+            result.insert_last(linklist.delete_last())
+            if not linklist.count:
+                result.traverse()
+                return
+    result.traverse()
 main()
+
