@@ -62,13 +62,29 @@ class BST:
         print(" ")
         print("Postorder:",end="")
         self.postorder(self.root)
+        print(" ")
+    def deepest_left(self,node):
+        #basecase
+        if node.left is None:
+            return node.data
+        else:
+            return self.deepest_left(node.left)
+    def deepest_right(self,node):
+        if node.right is None:
+            return node.data
+        else:
+            return self.deepest_right(node.right)
+    def find_min(self):
+        # print("DEBUG:",self.root.data)
+        return self.deepest_left(self.root)
+    def find_max(self):
+        return self.deepest_right(self.root)
 def main():
   my_bst = BST()
-  loop = int(input())
-#   if not loop:
-#       return
-  for i in range(loop):
+  for i in range(int(input())):
     my_bst.insert(int(input()))
   my_bst.traverse()
+  print("Max:", my_bst.find_max())
+  print("Min:", my_bst.find_min())
 
 main()

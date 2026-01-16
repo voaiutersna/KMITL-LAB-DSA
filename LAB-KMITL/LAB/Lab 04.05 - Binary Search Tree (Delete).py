@@ -62,13 +62,66 @@ class BST:
         print(" ")
         print("Postorder:",end="")
         self.postorder(self.root)
+        print(" ")
+    def deepest_left(self,node):
+        #basecase
+        if node.left is None:
+            return node.data
+        else:
+            return self.deepest_left(node.left)
+    def deepest_right(self,node):
+        if node.right is None:
+            return node.data
+        else:
+            return self.deepest_right(node.right)
+    def find_min(self):
+        # print("DEBUG:",self.root.data)
+        return self.deepest_left(self.root)
+    def find_max(self):
+        return self.deepest_right(self.root)
+    def delete(data):
+        pass
+    def MaximumLeft(self,node):
+        curr = node.left
+        while curr is not None and curr.right is not None:
+            curr = curr.right
+        return curr
+    def dfs_delete(self,node:BSTNode,data):
+        if node is None:
+            print(f"Delete Error,",data, "is not found in Binary Search Tree.")
+            return None
+        if node.data > data:
+                node.left = self.dfs_delete(node.left, data)
+        elif node.data < data:
+                node.right = self.dfs_delete(node.right, data)
+        else:
+            if node.left is None:
+                return node.right
+            if node.right is None:
+                return node.left
+            Max_value_node = self.MaximumLeft(node)
+            node.data = Max_value_node.data
+            node.left = self.dfs_delete(node.left, Max_value_node.data)
+        return node
+                
+    def delete(self,data):
+        if self.root:
+            self.root = self.dfs_delete(self.root,data)
+        else:
+            return None
 def main():
   my_bst = BST()
-  loop = int(input())
-#   if not loop:
-#       return
-  for i in range(loop):
-    my_bst.insert(int(input()))
+  while 1:
+    text = input()
+    if text == "Done":
+      break
+    condition, data = text.split(": ")
+    if condition == "I":
+      my_bst.insert(int(data))
+    elif condition == "D":
+      my_bst.delete(int(data))
+    else:
+      print("Invalid Condition")
   my_bst.traverse()
 
 main()
