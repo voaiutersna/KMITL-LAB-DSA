@@ -1,0 +1,156 @@
+class DataNode:
+    def __init__(self, data=None):
+        self.data = data
+        self.next = None
+class SinglyLinkedList:
+    def __init__(self):
+        self.count = 0
+        self.head = None
+    def traverse(self):
+        head = self.head
+        if head is None:
+            print("This is an empty list.")
+            return
+        count = 0
+        while head.next != None:
+            print(head.data,end="")
+            count += 1
+            if self.count != count:
+                print(" ",end="")
+            head = head.next
+        print(head.data)
+    def insert_last(self,data):
+        node = DataNode(data)
+        if not self.count:
+            self.head = node
+            self.count += 1
+            return
+        head = self.head
+        while True:
+            if head.next == None:
+                head.next = node
+                self.count += 1
+                return
+            head = head.next
+    def insert_front(self,data):
+        node = DataNode(data)
+        if not self.count:
+            self.head = node
+            self.count += 1
+            return
+        curr_head = self.head
+        self.head = node
+        node.next = curr_head
+        self.count += 1
+    def insert_before(self,node, data):
+        if not self.count:
+            print("Cannot insert, ",end="")
+            print(node,end="")
+            print(" does not exist.")
+            return
+
+        new_node = DataNode(data)
+
+        # กรณี node อยู่ที่ head
+        if self.head.data == node:
+            new_node.next = self.head
+            self.head = new_node
+            self.count += 1
+            return
+
+        # กรณี node อยู่ตำแหน่งอื่น
+        prev = self.head
+        curr = self.head.next
+
+        while curr is not None:
+            if curr.data == node:
+                prev.next = new_node
+                new_node.next = curr
+                self.count += 1
+                return
+            prev = curr
+            curr = curr.next
+
+        print("Cannot insert, ",end="")
+        print(node,end="")
+        print(" does not exist.")
+    def delete(self, data):
+        # กรณี linklist ว่าง
+        if self.head is None:
+            print("Cannot delete, ",end="")
+            print(data,end="")
+            print(" does not exist.")
+            return
+        curr = self.head
+
+        #target is head
+        if self.head.data == data:
+           self.head = self.head.next
+           self.count -= 1
+           return
+        #target is other
+        while curr.next!= None:
+            if curr.next.data == data:
+              target = curr.next
+              curr.next = target.next
+              self.count -= 1
+              return
+            curr = curr.next
+        print("Cannot delete, ",end="")
+        print(data,end="")
+        print(" does not exist.")
+    def findindex(self,index):
+        head = self.head
+        
+        if index < 1 or index > self.count:
+            print("Error")
+            return
+        #traverse
+        count = 1
+        curr = head
+        while count <= index:
+            if count == index:
+                print(curr.data)
+                return
+            curr = curr.next
+            count += 1
+    def insert_index(self,index,data):
+        #validate
+        #ex node มี 3 : valid(index) 0-4
+        if (self.count+1 < index) or index < 0:
+            return
+        
+        if index == 0:
+            self.insert_front(data)
+            return
+        #insert node
+        insert_node = DataNode(data)
+        count = 0
+        curr = self.head
+        while curr != None:
+            if count + 1 == index:
+                before_node = curr.next
+                curr.next = insert_node
+                insert_node.next = before_node
+                self.count += 1
+                return
+            curr = curr.next
+            count += 1
+
+def main():
+    linklist = SinglyLinkedList()
+    num = int(input())
+    # if num == 0:
+    #     inp = int(input())
+    #     data = int(input())
+    #     if inp == 0:
+    #         print(data)
+    #     return
+    for _ in range(num):
+        data = int(input())
+        linklist.insert_last(data)
+    index = int(input())
+    find_data = int(input())
+    linklist.insert_index(index,find_data)
+    linklist.traverse()
+main()
