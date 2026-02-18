@@ -1,5 +1,5 @@
 import json
-def main(num,last_index):
+def bubble(num,last_index):
     count = 0 
     for i in range(last_index+1):
         swapped = False
@@ -13,4 +13,4 @@ def main(num,last_index):
             break
     print(f"Comparison times: {count}")
     # print(last_index)
-main(json.loads(input()),int(input()))
+bubble(json.loads(input()),int(input()))

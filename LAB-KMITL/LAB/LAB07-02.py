@@ -1,7 +1,5 @@
 import json
-def main():
-    num = json.loads(input())
-    last_index = int(input())
+def selection(num,last_index):
     count = 0
     for i in range(last_index):
         smallest = num[i]
@@ -14,4 +12,4 @@ def main():
         num[i] , num[smallest_index] = num[smallest_index] , num[i]
         print(num)
     print(f"Comparison times: {count}")
-main()
+selection(json.loads(input()),int(input))

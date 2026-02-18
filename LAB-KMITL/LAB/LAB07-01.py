@@ -1,8 +1,6 @@
 import json
 
-def main():
-    num = json.loads(input())
-    last_index = int(input())
+def insertion(num,last_index):
     count = 0
     # print(num)
     # print(last_index)
@@ -21,4 +19,4 @@ def main():
     # print("-----")
     # for i in range(0,-1,-1):
     #     print(i)
-main()
+insertion(json.loads(input()),int(input))
