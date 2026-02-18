@@ -12,4 +12,4 @@ def selection(num,last_index):
         num[i] , num[smallest_index] = num[smallest_index] , num[i]
         print(num)
     print(f"Comparison times: {count}")
-selection(json.loads(input()),int(input))
+selection(json.loads(input()),int(input()))

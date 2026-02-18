@@ -19,4 +19,4 @@ def insertion(num,last_index):
     # print("-----")
     # for i in range(0,-1,-1):
     #     print(i)
-insertion(json.loads(input()),int(input))
+insertion(json.loads(input()),int(input()))
